@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <script src="javascript.js" defer></script>
         <title> tbc </title>
@@ -11,21 +11,66 @@
         <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <div id="webTitle">
-                
-            </div>
-            <nav id="mainNav">
-                <a href="index.html">home</a>
-                <a href="games.html">games</a>
-                <a href="activity.html">activity</a>
-                <a href="account.html">account</a>
-            </nav>
-        </header>
+        <div id="content">
+            <header>
+                <div id="webTitle">
+                    <img src="images/header.png" alt="title">
+                </div>
+                <nav id="mainNav">
+                    <a class="navItem" href="index.html">home</a>
+                    <a class="navItem" href="games.html">games</a>
+                    <a class="navItem" href="activity.html">activity</a>
+                    <a class="navItem" href="account.html">account</a>
+                </nav>
+            </header>
 
-        <main>
-            <div id="trending"></div>
-            <div id="trendingWithFriends"></div>
-        </main>
+            <main>
+                <section id="trending">
+                    <div class="headings">
+                        <h1> Trending Games </h1>
+                        <p> browse more </p>
+                    </div>
+                    <div class="scrollSection">
+                        <button class="left">\</button>
+
+                        <div class="scroll">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                        </div>
+                        
+                        <button class="right">/</button>
+                    </div>
+                </section>
+
+                <section id="trendingWithFriends">
+                    <div class="headings">
+                        <h1> Trending With Friends </h1>
+                        <p> browse more </p>
+                    </div>
+                    <div class="scrollSection">
+                        <button class="left">\</button>
+
+                        <div class="scroll">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                            <img src="images/gamecover.jpg" alt="cover">
+                        </div>
+                        
+                        <button class="right">/</button>
+                    </div>
+                </section>
+            </main>
+        </div>
     </body>
 </html>

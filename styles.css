@@ -9,7 +9,25 @@
 
 /*colour variables*/
 :root {
-    
+    --primary: rgb(13, 13, 77);
+    --buttons: rgb(7, 7, 185);
+}
+
+html, body {
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary);
+}
+
+#content {
+    width: 90%;
+    max-width: 1200px;
 }
 
 header {
@@ -18,12 +36,81 @@ header {
 
 #webTitle {
     border: solid red 2px;
+    
 }
 
 #mainNav {
     border: solid blue 2px;
+    border-left: none;
+    border-right: none;
+    display: flex;
+    justify-content: space-evenly;
+
+    padding: 1rem 0;
+}
+
+.navItem {
+    border-style: outset;
+    text-decoration: none;
+    padding: 0 1rem;
+    font-size: 2em;
+    background-color: var(--buttons);
+    color: white;
+    border-color: rgb(143, 143, 209);
+}
+
+.navItem:hover {
+    border-style: inset;
 }
 
 main {
     border: solid black 2px;
+}
+
+.headings {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    
+}
+
+.headings p {
+    padding-top: 2rem;
+}
+
+.scrollSection {
+    display: flex;
+    align-items: center;
+}
+
+.scrollSection button {
+    border: outset;
+
+}
+
+.scroll img {
+    width: calc(25% - 1rem);
+    object-fit: cover;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.scroll { 
+    overflow-x: auto;
+    scrollbar-width: none;
+    width: 100%;
+    display: flex;
+
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 900px) {
+    .scroll img {
+        width: calc(35% - 1rem);
+    }
+}
+
+@media (max-width: 600px) {
+    .scroll img {
+        width: calc(50% - 1rem);
+    }
 }
