@@ -2,9 +2,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /*colour variables*/
 :root {
     
+}
+
+header {
+    border: solid black 2px;
+}
+
+#webTitle {
+    border: solid red 2px;
+}
+
+#mainNav {
+    border: solid blue 2px;
+}
+
+main {
+    border: solid black 2px;
 }
