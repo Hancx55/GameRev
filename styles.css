@@ -25,6 +25,7 @@ body {
     background-color: var(--primary);
 }
 
+
 #content {
     width: 90%;
     max-width: 1200px;
@@ -36,7 +37,12 @@ header {
 
 #webTitle {
     border: solid red 2px;
-    
+}
+
+#webTitle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 #mainNav {
