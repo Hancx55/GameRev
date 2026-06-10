@@ -1,3 +1,16 @@
+
+//nav bar for all pages
+
+//phone side nav
+const navBtn = document.getElementsByClassName("navBtn")
+
+for(let i=0; i<navBtn.length; i++) {
+    navBtn[i].addEventListener("click", () => {
+        document.getElementById("sideNav").classList.toggle("open");
+    })
+}
+
+//scrolling sections on main page
 const scrollSections = document.getElementsByClassName("scrollSection");
 
 for (let i=0; i< scrollSections.length; i++) {
