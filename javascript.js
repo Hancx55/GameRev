@@ -1,14 +1,26 @@
 
 //nav bar for all pages
+const header = document.getElementsByTagName("header")[0];
 
-//phone side nav
-const navBtn = document.getElementsByClassName("navBtn")
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("Components/navigation.html")
+    .then(response => response.text())
+    .then(nav => {
+        header.innerHTML = nav;
 
-for(let i=0; i<navBtn.length; i++) {
-    navBtn[i].addEventListener("click", () => {
-        document.getElementById("sideNav").classList.toggle("open");
+        //phone side nav
+        const navBtn = document.getElementsByClassName("navBtn")
+
+        for(let i=0; i<navBtn.length; i++) {
+            navBtn[i].addEventListener("click", () => {
+                document.getElementById("sideNav").classList.toggle("open");
+            })
+        }
     })
-}
+})
+
+
+
 
 //scrolling sections on main page
 const scrollSections = document.getElementsByClassName("scrollSection");
