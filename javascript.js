@@ -9,13 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
         header.innerHTML = nav;
 
         //phone side nav
-        const navBtn = document.getElementsByClassName("navBtn")
+        const navBtn = document.getElementById("navBtn")
+        let navOpen = false;
 
-        for(let i=0; i<navBtn.length; i++) {
-            navBtn[i].addEventListener("click", () => {
-                document.getElementById("sideNav").classList.toggle("open");
-            })
-        }
+        navBtn.addEventListener("click", () => {
+            document.getElementById("sideNav").classList.toggle("open");
+            
+            if (!navOpen) {
+                document.getElementById("navBtnImg").src = "Images/blueGhost.jpg";
+                navOpen = true;
+            } else {
+                document.getElementById("navBtnImg").src = "Images/blinky.jpg";
+                navOpen = false;
+            }
+        })
     })
 })
 
