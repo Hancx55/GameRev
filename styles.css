@@ -191,3 +191,50 @@ body {
         width: calc(50% - 1rem);
     }
 }
+
+/*games page*/
+
+/*search bar*/
+#searchSection {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.search {
+    --searchPadding: 14px;
+
+    width: max-content;
+    display: flex;
+    align-items: center;
+
+    padding: var(--searchPadding);
+    border-radius: 28px;
+
+    background-color: var(--btnBorder);
+
+    width: 600px;
+
+    transition: background 0.25s, box-shadow 0.25s;
+}
+
+.search:focus-within {
+    background-color: rgb(163, 163, 238);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.search-input {
+    font-size: 1.5em;
+    color: #333333;
+    margin-left: var(--searchPadding);
+
+    outline: none;
+    border: none;
+    background: transparent;
+
+    flex: 1;
+}
+
+.search-input::placeholder, .search-icon {
+    color: rgba(0,0,0,0.5);
+}
