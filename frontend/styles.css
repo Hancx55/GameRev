@@ -133,6 +133,45 @@ body {
     }
 }
 
+/*clock*/
+
+.clock {
+    width: 30rem;
+    height: 30rem;
+
+    border: 10px solid rgb(28, 120, 133);
+    border-radius: 100%;
+    background-image: url("/images/circuitBoard.jpg");
+
+    padding: 2rem;
+    margin: 50px auto;
+}
+
+.clockFace {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-3px);  
+}
+
+.hand {
+    width: 50%;
+    height: 6px;
+
+    background: white;
+    position: absolute;
+    top: 50%;
+
+    transform: rotate(90deg);
+    transform-origin: 100%;
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.secondHand {
+    
+}
+
 /* main page */
 
 .headings {
@@ -223,7 +262,7 @@ body {
     box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
-.search-input {
+#search-input {
     font-size: 1.5em;
     color: #333333;
     margin-left: var(--searchPadding);
@@ -235,6 +274,6 @@ body {
     flex: 1;
 }
 
-.search-input::placeholder, .search-icon {
+#search-input::placeholder, .search-icon {
     color: rgba(0,0,0,0.5);
 }
