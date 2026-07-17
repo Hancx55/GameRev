@@ -55,54 +55,97 @@ for (let i=0; i< scrollSections.length; i++) {
 }
 
 //clock
-const secHand = document.querySelector('.secondHand');
-const minHand = document.querySelector('.minHand');
-const hourHand = document.querySelector('.hourHand');
+const clockFace = document.querySelector(".clock");
 
-function clockTick() {
-    
-    const now = new Date();
+if (clockFace) {
 
-    const seconds = now.getSeconds();
-    const secDegrees = (seconds/60) * 360;
+    const secHand = document.querySelector('.secondHand');
+    const minHand = document.querySelector('.minHand');
+    const hourHand = document.querySelector('.hourHand');
 
-    const minutes = now.getMinutes();
-    const minDegrees = ((minutes/60) * 360) + ((seconds/60)*6) + 90;
+    function clockTick() {
+        
+        const now = new Date();
 
-    const hours = now.getHours();
-    const hourDegrees = ((hours/12) * 360) + ((minutes/60)*30) + 90;
+        const seconds = now.getSeconds();
+        const secDegrees = (seconds/60) * 360;
 
-    secHand.style.transform = `rotate(${secDegrees}deg)`;
-    minHand.style.transform = `rotate(${minDegrees}deg)`;
-    hourHand.style.transform = `rotate(${hourDegrees}deg)`;  
+        const minutes = now.getMinutes();
+        const minDegrees = ((minutes/60) * 360) + ((seconds/60)*6) + 90;
+
+        const hours = now.getHours();
+        const hourDegrees = ((hours/12) * 360) + ((minutes/60)*30) + 90;
+
+        secHand.style.transform = `rotate(${secDegrees}deg)`;
+        minHand.style.transform = `rotate(${minDegrees}deg)`;
+        hourHand.style.transform = `rotate(${hourDegrees}deg)`;  
+    }
+
+
+    setInterval(clockTick, 1000);
+
 }
-
-setInterval(clockTick, 1000);
 
 //search bar 
 
+// const searchInput = document.getElementById("search-input");
+
+// if (searchInput) {
+//     searchInput.addEventListener("keydown", (e) => {
+//         if (e.key === "Enter" && document.activeElement === searchInput) {
+//             //prevent form submit
+//             e.preventDefault();
+//             console.log("enter pressed");
+//             const query = searchInput.value;
+//             console.log("searching for: " + query);
+//             //call backend
+//             searchGames(query);
+//         }
+//     })
+// }
+
+
+// async function searchGames(query) {
+
+//     const response = await fetch("http://localhost:3000/search?query="+ encodeURIComponent(query));
+//     const data = await response.json();
+
+//     console.log(data);
+//     console.log("search completed");
+// }
+
+//search bar test
 const searchInput = document.getElementById("search-input");
 
-if (searchInput) {
-    searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && document.activeElement === searchInput) {
-            //prevent form submit
-            e.preventDefault();
-            console.log("enter pressed");
-            const query = searchInput.value;
-            console.log("searching for: " + query);
-            //call backend
-            searchGames(query);
-        }
+
+searchInput.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        console.log(query);
+        if (!query) return;
+
+        const res = await fetch(`/search?query=${encodeURIComponent(query)}`);
+        const data = await res.json();
+
+        console.log(data);
+        displayResults(data.results);
+    }
+})
+
+function displayResults(games) {
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "";
+
+    games.forEach(game => {
+        const item = document.createElement("div");
+        item.className = "game-item";
+
+        item.innerHTML = `
+        <div class="imgCard"><img src="${game.background_image}" /></div>
+        <h3>${game.name}</h3>
+        `
+        resultsDiv.appendChild(item);
     })
-}
-
-
-async function searchGames(query) {
-
-    const response = await fetch("http://localhost:3000/search?query="+ encodeURIComponent(query));
-    const data = await response.json();
-
-    console.log(data);
-    console.log("search completed");
+    
 }
