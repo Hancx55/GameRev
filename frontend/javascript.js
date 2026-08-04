@@ -86,35 +86,7 @@ if (clockFace) {
 
 }
 
-//search bar 
-
-// const searchInput = document.getElementById("search-input");
-
-// if (searchInput) {
-//     searchInput.addEventListener("keydown", (e) => {
-//         if (e.key === "Enter" && document.activeElement === searchInput) {
-//             //prevent form submit
-//             e.preventDefault();
-//             console.log("enter pressed");
-//             const query = searchInput.value;
-//             console.log("searching for: " + query);
-//             //call backend
-//             searchGames(query);
-//         }
-//     })
-// }
-
-
-// async function searchGames(query) {
-
-//     const response = await fetch("http://localhost:3000/search?query="+ encodeURIComponent(query));
-//     const data = await response.json();
-
-//     console.log(data);
-//     console.log("search completed");
-// }
-
-//search bar test
+//search bar
 const searchInput = document.getElementById("search-input");
 
 
@@ -129,10 +101,11 @@ searchInput.addEventListener("keydown", async (e) => {
         const data = await res.json();
 
         console.log(data);
-        displayResults(data.results);
+        displayResults(data);
     }
 })
 
+// display
 function displayResults(games) {
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "";
@@ -141,8 +114,17 @@ function displayResults(games) {
         const item = document.createElement("div");
         item.className = "game-item";
 
+        let coverUrl;
+
+        if(game.cover && game.cover.url) {
+            coverUrl = "https:" + game.cover.url.replace("t_thumb", "t_cover_big");
+        }
+        else {
+            coverUrl = "https://via.placeholder.com/200x250?text=No+Image";
+        }
+
         item.innerHTML = `
-        <div class="imgCard"><img src="${game.background_image}" /></div>
+        <div class="imgCard"><img src="${coverUrl}" /></div>
         <h3>${game.name}</h3>
         `
         resultsDiv.appendChild(item);
