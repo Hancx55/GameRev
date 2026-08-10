@@ -157,18 +157,20 @@ body {
 }
 
 .hand {
-    width: 50%;
+    
     height: 5px;
 
     background-color: aliceblue;
     border: solid;
-    border-radius: 50%;
+    
     position: absolute;
+
     top: 50%;
+    left: 50%;
 
 
     transform: rotate(90deg);
-    transform-origin: 100%;
+    transform-origin: 0 50%;
     transition: all 0.05s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
@@ -177,7 +179,24 @@ body {
     background-position: center;
 }
 
+.secondHand {
+    width: 22%;
+}
 
+.minHand {
+    width: 32%;
+}
+
+.hourHand {
+    width: 50%;
+}
+
+.clockNumber {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: aliceblue;
+}
 
 /* main page */
 

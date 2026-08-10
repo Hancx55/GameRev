@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import fetch from "node-fetch";
+import Fuse from "fuse.js";
 
 const app = express();
 
@@ -46,7 +47,16 @@ app.get("/search", async (req, res) => {
         });
 
         const data = await response.json();
-        res.json(data); // send json to front end
+
+        const fuse = new Fuse(data, {
+            keys: ["name"],
+            threshold: 0.5,
+            ignoreLocation: true,
+        });
+
+        const results = fuse.search(query).map(r => r.item);
+
+        res.json(results); // send json to front end
     }
     catch (err) {
         console.error(err);
