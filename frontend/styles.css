@@ -36,10 +36,50 @@ body {
 }
 
 /* title and navigation*/ 
-#webTitle img {
+#webTitle {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 1rem;
+}
+
+#middle {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+}
+
+#middle img {
+    object-fit: contain;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    
+}
+
+#middle h1 {
+    font-family: "Bitcount Prop Single", sans-serif;
+    color: rgb(25, 194, 25);
+    font-size: 4rem;
+}
+
+.sideImg {
+    width: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    .sideImg, #middle img {
+        width: 80%;
+        max-width: 200px;
+        min-width: 120px;
+        margin: 0 auto;
+    }
+
+    #middle h1 {
+        font-size: 1.2rem;
+    }
+
+    #webTitle {
+        margin: 0;
+    }
 }
 
 #mainNav {
@@ -123,6 +163,7 @@ body {
 #sideNav.open {
     transform: translateX(-50%) translateY(0); 
     opacity: 1;
+    z-index: 9999;
     
 }
 
@@ -184,11 +225,11 @@ body {
 }
 
 .minHand {
-    width: 32%;
+    width: 50%;
 }
 
 .hourHand {
-    width: 50%;
+    width: 32%;
 }
 
 .clockNumber {
@@ -196,6 +237,16 @@ body {
     transform: translate(-50%, -50%);
     font-size: 2rem;
     color: aliceblue;
+}
+
+@media (max-width: 600px) {
+    .clock {
+        width: 20rem;
+        height: 20rem;
+        
+    }
+
+    
 }
 
 /* main page */
