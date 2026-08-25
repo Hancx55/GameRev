@@ -23,6 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
     })
+
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+
+    if (q) {
+        runSearch(q);
+    }
 })
 
 
@@ -118,46 +125,49 @@ if (searchInput) {
         searchInput.addEventListener("keydown", async (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
+
             const query = searchInput.value.trim();
             console.log(query);
             if (!query) return;
 
-            const res = await fetch(`/search?query=${encodeURIComponent(query)}`);
-            const data = await res.json();
+            window.history.pushState({}, "", `?q=${query}`);
 
-            console.log(data);
-            displayResults(data);
+            runSearch(query);
         }
     })
-
-    // display
-    function displayResults(games) {
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = "";
-
-        games.forEach(game => {
-            const item = document.createElement("div");
-            item.className = "game-item";
-
-            let coverUrl;
-
-            if(game.cover && game.cover.url) {
-                coverUrl = "https:" + game.cover.url.replace("t_thumb", "t_cover_big");
-            }
-            else {
-                coverUrl = "https://via.placeholder.com/200x250?text=No+Image";
-            }
-
-            item.innerHTML = `
-            <div class="imgCard"><img src="${coverUrl}" /></div>
-            <h3>${game.name}</h3>
-            `
-            resultsDiv.appendChild(item);
-        })
-        
-    }
 }
 
+async function runSearch(q) {
+    const res = await fetch(`/search?query=${encodeURIComponent(q)}`);
+    const data = await res.json();
 
+    console.log(data);
+    displayResults(data);
+}
 
-// next, to add LOAD MORE to page, and some better sorting using libraries
+// display
+function displayResults(games) {
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "";
+
+    games.forEach(game => {
+        const item = document.createElement("div");
+        item.className = "game-item";
+
+        let coverUrl;
+
+        if(game.cover && game.cover.url) {
+            coverUrl = "https:" + game.cover.url.replace("t_thumb", "t_cover_big");
+        }
+        else {
+            coverUrl = "https://via.placeholder.com/200x250?text=No+Image";
+        }
+
+        item.innerHTML = `
+        <div class="imgCard"><img src="${coverUrl}" /></div>
+        <h3>${game.name}</h3>
+        `
+        resultsDiv.appendChild(item);
+    })
+    
+}

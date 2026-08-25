@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Jersey 10", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -27,6 +26,8 @@ body {
     display: flex;
     justify-content: center;
     background-color: var(--primary);
+
+    font-family: "Jersey 10", sans-serif;
 }
 
 
@@ -394,3 +395,101 @@ body {
     object-fit: contain;
 }
 
+/* game dynamic information page  design */
+#mainGame {
+    display: flex;
+    padding: 2rem 0;
+    margin: auto;
+    gap: 1rem;
+}
+
+#gameInfoRow1 {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #ddd;
+}
+
+#gameDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+#gameDetails h1 {
+    padding: 1rem 0;
+}
+
+#gameDetails p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+#gamePageBtns {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#gamePageBtns button {
+    padding: 1rem;
+    background-color: #007bff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+#gameImgContainer {
+    flex: 0 0 35%;
+}
+
+#gameImg {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#mainGameInfo {
+    display: flex;
+    flex-direction: column;
+    font-family:  Arial, sans-serif;
+    gap: 2rem;
+}
+
+#gameInfoRow2 {
+    flex-direction: row;
+}
+
+#gamePlatformInfo {
+    margin: auto;
+}
+
+#gameMetadata {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+
+.metaData {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+/* metadata spans */
+.metaTitle {
+    color: grey;
+    font-weight: bold;
+}
+
+#gameInfoRow1, #gameInfoRow2 {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 1rem;
+}

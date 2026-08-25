@@ -5,6 +5,14 @@ import express from "express";
 import fetch from "node-fetch";
 import Fuse from "fuse.js";
 
+//for url updating
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+//search server setup for igdb
 const app = express();
 
 const CLIENT_ID = process.env.TWITCH_CLIENT_ID;
@@ -63,6 +71,10 @@ app.get("/search", async (req, res) => {
         res.status(500).json({error: "search failed.."});
     }
 });
+
+app.get("/games", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "games.html"));
+})
 
 app.use(express.static("frontend"));
 
