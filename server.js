@@ -33,6 +33,7 @@ async function getIGDBToken() {
     return data.access_token;
 }
 
+//search method for searchbar
 app.get("/search", async (req, res) => {
     const query = req.query.query;
 
@@ -56,6 +57,7 @@ app.get("/search", async (req, res) => {
 
         const data = await response.json();
 
+        //tried adding fuse dont think it works
         const fuse = new Fuse(data, {
             keys: ["name"],
             threshold: 0.5,
@@ -72,9 +74,49 @@ app.get("/search", async (req, res) => {
     }
 });
 
+app.get(`/api/game/:id`, async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const token = await getIGDBToken();
+
+        const response = await(fetch("https://api.igdb.com/v4/games", {
+            method: "POST",
+            headers: {
+                "Client-ID": CLIENT_ID,
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/json"
+            },
+            body: `
+            fields name, cover.url, summary, first_release_date, platforms.name, rating, 
+            involved_companies.company.name,
+            involved_companies.developer,
+            involved_companies.publisher;
+            where id = ${id};
+            limit 1;
+            `
+        }))
+
+        const data = await response.json();  
+        res.json(data);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({error: "game failed.."});
+    }
+    
+})
+
+
+//sets the url for games.html to game
 app.get("/games", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "games.html"));
 })
+
+app.get("/game/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "game.html"));
+})
+
 
 app.use(express.static("frontend"));
 
