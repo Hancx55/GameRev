@@ -108,15 +108,20 @@ app.get(`/api/game/:id`, async (req, res) => {
 })
 
 
+
 //sets the url for games.html to game
 app.get("/games", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "games.html"));
 })
 
+//for specific game pages
 app.get("/game/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "game.html"));
 })
 
+app.get("/home", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "index.html"));
+})
 
 app.use(express.static("frontend"));
 
