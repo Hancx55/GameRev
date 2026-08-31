@@ -107,8 +107,6 @@ app.get(`/api/game/:id`, async (req, res) => {
     
 })
 
-
-
 //sets the url for games.html to game
 app.get("/games", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "games.html"));

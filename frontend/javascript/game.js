@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
 
     const path = window.location.pathname.split("/");
-    console.log(path);
     
     const id = path.pop();
     console.log(id);
@@ -43,10 +42,11 @@ function displayGameInfo(game) {
     //summary
     const summary = document.getElementById("gameDesc");
     if (!(game.summary === null)) {
-        summary.innerHTML = game.summary;
+        summary.innerHTML = renderSummary(game.summary);
     }
     else { summary.innerHTML = 'no game summary'};
-    
+
+
     //metadata
     //developer
     const dev = document.getElementById("devResult");
@@ -128,21 +128,21 @@ function renderPlatforms(platforms) {
             html += `<li>${p.name}</li>`
         })
 
-        html += `<button id="loadPlatformsBtn">see more</button>`;
+        html += `<button id="loadPlatformsBtn" class="seeMore">see more</button>`;
     }
     else {
         platforms.forEach(platform => {
             html += `<li>${platform.name}</li>`
         })
         if (platforms.length > 4) {
-            html += `<button id="loadPlatformsBtn">see less</button>`;
+            html += `<button id="loadPlatformsBtn" class="seeMore">see less</button>`;
         }
     }
 
     return html;
 }
 
-
+let summaryOpen = false;
 
 document.addEventListener('click', (e) => {
     if (e.target.id === 'loadPlatformsBtn') {
@@ -153,16 +153,41 @@ document.addEventListener('click', (e) => {
         const platforms = document.getElementById("gamePlatforms");
         platforms.innerHTML = renderPlatforms(gameData.platforms);
     }
+
+    if(e.target.id === 'readMoreSummary') {
+        if (summaryOpen) {summaryOpen = false}
+        else {summaryOpen = true}
+
+        const summary = document.getElementById("gameDesc");
+        summary.innerHTML = renderSummary(gameData.summary);
+    }
 })
 
 
+function formatSummary(summary, max) {
+    if (summary.length <= max) {
+        return summary;
+    }
 
-//for each platform--
-//add to list the html for that game--
+    return summary.slice(0, summary.lastIndexOf(" ", max));
+}
 
-//if more than 4 in that array - slice--
-//inputted html = with the button--
+function renderSummary (summary) {
+    const maxSummaryLength = 620;
 
-//if button pressed, html changes to html with all platforms + button (changed name)
-//button toggle open and close basically
- 
+    const firstS = formatSummary(summary, maxSummaryLength);
+
+    if (!(summaryOpen) && summary.length > maxSummaryLength) {
+        return (`${firstS}... <button id="readMoreSummary" class="seeMore">read more</button>`);
+    }
+    else {
+        let html = summary;
+        if (summary.length > maxSummaryLength) {
+            html += ` <button id="readMoreSummary" class="seeMore">read less</button>`;
+        }
+
+        return html;
+    }
+
+    
+}

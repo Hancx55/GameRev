@@ -58,7 +58,7 @@ function displayResults(games) {
     
     //go onto game info page
     const gameItems = Array.from(document.getElementsByClassName("game-item"));
-    console.log(gameItems);
+    
 
     if (gameItems) {
         gameItems.forEach(item => item.addEventListener('click', () => {

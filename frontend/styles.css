@@ -464,6 +464,7 @@ body {
     flex-direction: column;
     font-family:  Arial, sans-serif;
     gap: 2rem;
+    margin: auto;
 }
 
 #gameInfoRow2 {
@@ -517,7 +518,7 @@ body {
     padding-bottom: 1rem;
 }
 
-#loadPlatformsBtn {
+.seeMore {
     border: none;
     background: none;
     color: rgb(112, 183, 231);
