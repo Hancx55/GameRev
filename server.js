@@ -36,9 +36,13 @@ async function getIGDBToken() {
 //search method for searchbar
 app.get("/search", async (req, res) => {
     const query = req.query.query;
+    const page = parseInt(req.query.page) || 1; 
+    const limit = 20;
+    const offset = (page-1) * limit; //how far in to begin results
 
     try {
         console.log(query);
+        console.log(page);
         const token = await getIGDBToken();
 
         const response = await fetch("https://api.igdb.com/v4/games", {
@@ -51,29 +55,32 @@ app.get("/search", async (req, res) => {
             body: `
             fields name, cover.url, first_release_date, summary, rating, platforms.name;
             search "${query}";
-            limit 20;
+            limit ${limit};
+            offset ${offset};
             `
         });
 
         const data = await response.json();
 
         //tried adding fuse dont think it works
-        const fuse = new Fuse(data, {
-            keys: ["name"],
-            threshold: 0.5,
-            ignoreLocation: true,
-        });
+        // const fuse = new Fuse(data, {
+        //     keys: ["name"],
+        //     threshold: 0.1,
+        //     ignoreLocation: true,
+        // });
 
-        const results = fuse.search(query).map(r => r.item);
+        // const results = fuse.search(query).map(r => r.item);
 
-        res.json(results); // send json to front end
+        res.json({page, data, moreToCome: data.length === limit}); // send json to front end
     }
     catch (err) {
         console.error(err);
         res.status(500).json({error: "search failed.."});
     }
-});
+}); 
 
+
+//game info pages
 app.get(`/api/game/:id`, async (req, res) => {
     const id = req.params.id;
 

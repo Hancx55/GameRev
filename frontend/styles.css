@@ -395,6 +395,22 @@ body {
     object-fit: contain;
 }
 
+#loadMoreBtn {
+    border-style: outset;
+    text-decoration: none;
+    padding: 0 1rem;
+    font-size: 1.7rem;
+    font-family: "Jersey 10", sans-serif;
+
+    background-color: var(--buttons);
+    color: white;
+    border-color: var(--btnBorder);
+}
+
+#loadMoreBtn:hover {
+    border-style: inset;
+}
+
 /* game dynamic information page  design */
 #mainGame {
     display: flex;

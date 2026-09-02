@@ -1,3 +1,4 @@
+let allResults = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -29,12 +30,63 @@ if (searchInput) {
     })
 }
 
+let currentQuery;
+let currentPage;
+
 async function runSearch(q) {
-    const res = await fetch(`/search?query=${encodeURIComponent(q)}`);
+    currentQuery = q;
+    currentPage = 1;
+
+    const res = await fetch(`/search?query=${encodeURIComponent(q)}&page=1`);
     const data = await res.json();
 
-    console.log(data);
-    displayResults(data);
+    allResults = data;
+
+    //allresults = {page, data, moreToCome <- boolean}
+    console.log(allResults);
+    displayResults(allResults.data);
+
+    //adds button if 20+ results
+    loadMoreBtn(allResults.moreToCome);
+}
+
+function loadMoreBtn(isMore) {
+    const div = document.getElementById("loadMore");
+    console.log(`is more = ${isMore}`);
+
+    if (isMore) {
+        div.innerHTML = (`<button id=loadMoreBtn>Load More</button>`);
+
+        const btn = document.getElementById('loadMoreBtn');
+
+        btn.addEventListener('click', () => {
+            loadMoreResults();
+        })
+    }
+    else {
+        //no more results, removes button
+        div.innerHTML = "";
+    }
+}
+
+async function loadMoreResults() {
+    currentPage ++;
+    
+    const res = await fetch(`/search?query=${encodeURIComponent(currentQuery)}&page=${currentPage}`);
+    const data = await res.json();
+
+    //add next 'page' of data to results, displaying this
+    console.log(`${data.data.length} results added`)
+
+    //updating results
+    allResults.data = [...allResults.data, ...data.data];
+    allResults.page = data.page;
+    allResults.moreToCome = data.moreToCome;
+
+    console.log(allResults);
+
+    displayResults(allResults.data);
+    loadMoreBtn(allResults.moreToCome);    
 }
 
 // display the games results
@@ -55,6 +107,7 @@ function displayResults(games) {
         `
         resultsDiv.appendChild(item);
     })
+
     
     //go onto game info page
     const gameItems = Array.from(document.getElementsByClassName("game-item"));
