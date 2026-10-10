@@ -3,6 +3,8 @@ dotenv.config();
 
 import express from "express";
 import fetch from "node-fetch";
+
+//for token search
 import Fuse from "fuse.js";
 
 //for url updating
@@ -62,15 +64,24 @@ app.get("/search", async (req, res) => {
 
         const data = await response.json();
 
-        //tried adding fuse dont think it works
-        // const fuse = new Fuse(data, {
+        //fuse.js, works but  only on the 20 results
+        //could fetch many results(500 or so) and then use fuse when search is actually happening
+        //but this would be slow - can implement this when calling my own server
+        // const fuse = new Fuse(results, {
         //     keys: ["name"],
-        //     threshold: 0.1,
+        //     threshold: 0.4,
         //     ignoreLocation: true,
+
+        //     //enable token
+        //     useExtendedSearch: false,
+        //     includeScore: true,
+        //     minMatchCharLength: 2,
+        //     tokenize: true,
+        //     matchAllTokens: false //not strict
         // });
 
-        // const results = fuse.search(query).map(r => r.item);
-
+        // const data = fuse.search(query).map(r => r.item);
+       
         res.json({page, data, moreToCome: data.length === limit}); // send json to front end
     }
     catch (err) {

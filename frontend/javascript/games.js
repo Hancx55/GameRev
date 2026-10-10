@@ -40,6 +40,7 @@ async function runSearch(q) {
     const res = await fetch(`/search?query=${encodeURIComponent(q)}&page=1`);
     const data = await res.json();
 
+    console.log(data);
     allResults = data;
 
     //allresults = {page, data, moreToCome <- boolean}
